@@ -1,58 +1,48 @@
-/**@type {HTMLDivElement} */
-const gameField = document.getElementById("gameField");
-const gameCtx = gameField.getContext("2d");
-GAMEFIELD_WIDTH = gameField.width = 600;
-GAMEFIELD_HEIGHT = gameField.height = 500;
-const numberOfFlies = 15;
-const flyArray = [];
-
-const flyImage = new Image();
-flyImage.src = 'fly-sprite.gif';
+window.onload = function () {
+  const body = document.body;
+  field = document.getElementById("gameField");
+  console.log(body);
+  GAMEFIELD_WIDTH = gameField.width = 600;
+  GAMEFIELD_HEIGHT = gameField.height = 500;
 
 
 
-let header = document.getElementById("header")
-header.textContent += "kill the flies..."
+  createDuck = () => {
+    let duckChara = document.createElement('div');
+    duckChara.classList.add('duck');
+    document.getElementById("gameField").appendChild(duckChara);
 
 
+    moveDuckChara = (duckChara) => {
+      let moveUp = Math.random() * field.height;
+      let moveLeft = Math.random() * field.width;
+      duckChara.style.top = moveUp + 'px';
+      duckChara.style.left = moveLeft + 'px';
+    }
+    moveDuckChara(duckChara)
 
-class Enemy {
-  constructor() {
+    setInterval(() => moveDuckChara(duckChara), 1500)
 
-
-    //this.speed = Math.random() * 4 - 2;
-    this.spriteWidth = 500;
-    this.spriteHeight = 380;
-    this.width = this.spriteWidth / 6;
-    this.height = this.spriteHeight / 6;
-    this.x = Math.random() * (gameField.width);
-    this.y = Math.random() * (gameField.height);
-    this.frame = 0;
+    duckChara.addEventListener('click', () => {
+      duckChara.classList.add('shot');
+      let duckShot = document.querySelector(".shot");
+      setTimeout(() => duckShot.remove(), 100)
+      setTimeout(() => checkForWinner(), 100)
+    })
+    return duckChara
   }
-  update() {
-    this.x += Math.random() * 10 - 5.5;
-    this.y += Math.random() * 24 - 10.5;
 
-    //this.frame > 0 ? this.frame = 0 : this.frame++;
+  for (let i = 0; i < 6; i++) {
+    createDuck();
   }
-  draw() {
-    gameCtx.strokeRect(this.x, this.y, this.width, this.height);
-    gameCtx.drawImage(flyImage, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+
+
+  let liveDucks = document.querySelectorAll('.duck')
+  function checkForWinner() {
+    if (liveDucks.length === 0) {
+      window.alert("YOU WIN!")
+    }
+
   }
+
 };
-
-for (let i = 0; i < numberOfFlies; i++) {
-  flyArray.push(new Enemy());
-};
-
-
-function flyAnimate() {
-  gameCtx.clearRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
-
-  flyArray.forEach(enemy => {
-    enemy.update();
-    enemy.draw();
-  })
-  requestAnimationFrame(flyAnimate)
-}
-flyAnimate()
