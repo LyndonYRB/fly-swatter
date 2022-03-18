@@ -17,7 +17,7 @@ body {background-color: black;
   overflow: hidden;
 }
 
-.duck {
+.fly {
   position: absolute;
   background-image: url(images/fly-sprite.gif);
   width: 100%;
