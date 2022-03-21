@@ -28,6 +28,8 @@ createFly = () => {
   flyDiv.style.top = Math.floor(Math.random() * 90 + 5) + '%';
   flyDiv.style.left = Math.floor(Math.random() * 90 + 5) + '%';
 
+  //the fly moves...
+
   let deltaX = 0;
   let deltaY = 0;
 
@@ -50,6 +52,8 @@ createFly = () => {
   }
   window.requestAnimationFrame(animationframe);
 
+  //kill the fly...
+
   flyDiv.addEventListener("click", () => {
 
     setTimeout(() => flyDiv.remove(), 100)
@@ -61,22 +65,22 @@ startGame = () => {
   header.innerHTML = "kill the fly before it touches the cake...";
   createFly();
 }
-
+// the win condition
 let checkFlies = () => {
   if (document.querySelectorAll(".fly").length === 0) {
     header.innerHTML = "You did it!!";
-    gameField.appendChild(button)
-    button.innerHTML = "GO AGAIN?"
-    console.log("gameover")
+    gameField.appendChild(button);
+    button.innerHTML = "GO AGAIN?";
+    console.log("gameover");
   }
 }
 button.addEventListener('click', () => {
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 2; i++); {
     createFly();
     header.innerHTML = "kill the flies before they touch the cake...";
     gameField.removeChild(button);
   }
 });
 
-startGame()
+startGame();
 
