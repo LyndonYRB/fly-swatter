@@ -12,6 +12,8 @@ Click on the fly to make is disappear. Once you have completed the object you wi
 
 - I keep getting an error on line 77 in the js file.
 
+- If you expand the window, the fly will wander off the blue background, it's reccomended to adjust the window size to 600 x 600.
+
 ### Installing
 
 na
