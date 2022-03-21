@@ -9,10 +9,9 @@ body {background-color: black;
   background-color: rgb(171, 208, 208);
 }
 
-
 img {
   position: absolute;
-  width: 80px;
+  width: 90px;
 }
 
 .fly {
@@ -21,16 +20,14 @@ position: absolute;
 
 .cake {
   position: absolute;
-  
   width: 100px;
-  height: 70px;
-  background-color: brown;
+  height: 90px;
+ 
   bottom: 0;
   left: 300px;
 }
 
 
-.duck.shot {
-  background-position: center;
-  background-image: url(images/shot.png);
+button {
+display: block;
 }

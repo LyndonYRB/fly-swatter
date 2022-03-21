@@ -1,14 +1,22 @@
 
 let gameField = document.getElementById("gameField");
 
-let header = document.getElementById("header")
+let header = document.getElementById("header");
 
-let cake = document.createElement("div");
-cake.classList.add("cake")
-gameField.appendChild(cake)
+let button = document.createElement("button");
 
+let gameOver = document.createElement("button");
 
+//cake
+let cakeDiv = document.createElement("div");
+cakeDiv.classList.add("cake");
+gameField.appendChild(cakeDiv);
+cakePic = document.createElement("img");
+cakeDiv.appendChild(cakePic);
+cakePic.src = "images/chocolate-cake.png";
+cakeDiv.style.position = "absolute";
 
+//fly
 createFly = () => {
   let flyDiv = document.createElement("div");
   flyDiv.classList.add("fly");
@@ -44,20 +52,31 @@ createFly = () => {
 
   flyDiv.addEventListener("click", () => {
 
-    setTimeout(() => flyDiv.remove(), 400)
-    setTimeout(() => checkFlies(), 200)
+    setTimeout(() => flyDiv.remove(), 100)
+    setTimeout(() => checkFlies(), 100)
   })
   return flyDiv
 }
-for (let i = 0; i < 3; i++) {
+startGame = () => {
+  header.innerHTML = "kill the fly before it touches the cake...";
   createFly();
 }
 
 let checkFlies = () => {
   if (document.querySelectorAll(".fly").length === 0) {
     header.innerHTML = "You did it!!";
+    gameField.appendChild(button)
+    button.innerHTML = "GO AGAIN?"
     console.log("gameover")
   }
 }
+button.addEventListener('click', () => {
+  for (let i = 0; i < 2; i++) {
+    createFly();
+    header.innerHTML = "kill the flies before they touch the cake...";
+    gameField.removeChild(button);
+  }
+});
 
+startGame()
 
