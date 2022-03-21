@@ -1,7 +1,7 @@
 
 let gameField = document.getElementById("gameField");
 
-
+let header = document.getElementById("header")
 
 let cake = document.createElement("div");
 cake.classList.add("cake")
@@ -23,8 +23,6 @@ createFly = () => {
   let deltaX = 0;
   let deltaY = 0;
 
-
-
   function animationframe() {
     if (Math.random() > 0.95) {
       deltaX = Math.floor(Math.random() * 10);
@@ -40,14 +38,26 @@ createFly = () => {
     }
     flyDiv.style.top = '' + Math.min(Math.max(parseInt(flyDiv.style.top) + deltaY, 0), window.innerHeight - 170) + 'px';
     flyDiv.style.left = '' + Math.min(Math.max(parseInt(flyDiv.style.left) + deltaX, 0), window.innerWidth - 110) + 'px';
-
     window.requestAnimationFrame(animationframe);
-
-
   }
-
   window.requestAnimationFrame(animationframe);
+
+  flyDiv.addEventListener("click", () => {
+
+    setTimeout(() => flyDiv.remove(), 400)
+    setTimeout(() => checkFlies(), 200)
+  })
+  return flyDiv
+}
+for (let i = 0; i < 3; i++) {
+  createFly();
 }
 
-createFly()
+let checkFlies = () => {
+  if (document.querySelectorAll(".fly").length === 0) {
+    header.innerHTML = "You did it!!";
+    console.log("gameover")
+  }
+}
+
 
