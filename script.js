@@ -1,52 +1,30 @@
-window.onload = function () {
-  //playing field
-  const body = document.body;
-  field = document.getElementById("gameField");
-  console.log(body);
-  GAMEFIELD_WIDTH = gameField.width = 600;
-  GAMEFIELD_HEIGHT = gameField.height = 500;
-  console.log(body);
-  console.log(gameField.width)
-  console.log(gameField.height)
+let gameField = document.getElementById("gameField");
 
-  // the flies
+moveFly = () => {
+  createFly.x += Math.random() * 5;
+  createFly.x += Math.random() * 5;
+}
 
-  createDuck = () => {
-    let duckChara = document.createElement('div');
-    duckChara.classList.add('fly');
-    document.getElementById("gameField").appendChild(duckChara);
-
-
-    moveDuckChara = (duckChara) => {
-      let moveUp = Math.random() * field.height;
-      let moveLeft = Math.random() * field.width;
-      duckChara.style.top = moveUp + 'px';
-      duckChara.style.left = moveLeft + 'px';
-    }
-    moveDuckChara(duckChara)
-
-    setInterval(() => moveDuckChara(duckChara), 1500)
-
-    duckChara.addEventListener('click', () => {
-      duckChara.classList.add('shot');
-      let duckShot = document.querySelector(".shot");
-      setTimeout(() => duckShot.remove(), 100)
-      setTimeout(() => checkForWinner(), 100)
-    })
-    return duckChara
-  }
-
-  for (let i = 0; i < 6; i++) {
-    createDuck();
-  }
+createFly = () => {
+  let flyDiv = document.createElement("div");
+  flyDiv.classList.add("fly");
+  gameField.appendChild(flyDiv);
+  flyPic = document.createElement("img");
+  flyDiv.appendChild(flyPic)
+  flyPic.src = "images/fly-sprite.gif"
+  flyDiv.style.position = "absolute";
+  flyDiv.style.top = Math.floor(Math.random() * 90 + 5) + '%';
+  flyDiv.style.left = Math.floor(Math.random() * 90 + 5) + '%';
 
 
-  let liveDucks = document.querySelectorAll('.duck')
-  function checkForWinner() {
-    if (liveDucks.length === 0) {
-      window.alert("YOU WIN!")
-    }
 
-  }
+}
+animate = () => {
+  setTimeout(animate, 200);
+  moveFly()
+}
+createFly()
 
-};
+animate()
+cake = document.createElement("div");
+

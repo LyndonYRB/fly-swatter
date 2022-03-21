@@ -1,66 +1,80 @@
-/**@type {HTMLDivElement} */
-const gameField = document.getElementById("gameField");
-const gameCtx = gameField.getContext("2d");
-GAMEFIELD_WIDTH = gameField.width = 600;
-GAMEFIELD_HEIGHT = gameField.height = 500;
-const numberOfFlies = 15;
-const flyArray = [];
-
-gameFrame = 0;
-
-
-let header = document.getElementById("header")
-header.textContent += "kill the flies..."
-
-
-
-class Enemy {
-  constructor() {
-
-    this.image = new Image();
-    this.image.src = 'fly-sprite.gif'
-    //this.speed = Math.random() * 4 - 2;
-    this.spriteWidth = 500;
-    this.spriteHeight = 380;
-    this.width = this.spriteWidth / 6;
-    this.height = this.spriteHeight / 6;
-    this.x = Math.random() * (gameField.width - this.width);
-    this.y = Math.random() * (gameField.height - this.height);
-    this.newX = Math.random() * (gameField.width - this.width);
-    this.newY = Math.random() * (gameField.height - this.height);
-    this.frame = 0;
-    this.wingSpeed = Math.floor(Math.random() * 3 + 1);
-
-  }
-  update() {
-
-    // this.x = 0;
-    // this.y = 0;
-
-    if (gameFrame % this.wingSpeed === 0) {
-      this.frame > 1 ? this.frame = 0 : this.frame++;
-    }
-
-  }
-  draw() {
-
-    gameCtx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
-  }
-};
-
-for (let i = 0; i < numberOfFlies; i++) {
-  flyArray.push(new Enemy());
-};
-
-
-function flyAnimate() {
-  gameCtx.clearRect(0, 0, GAMEFIELD_WIDTH, GAMEFIELD_HEIGHT);
-
-  flyArray.forEach(enemy => {
-    enemy.update();
-    enemy.draw();
-  });
-  gameFrame++;
-  requestAnimationFrame(flyAnimate)
+var height = 0;
+var width = 0;
+var lives = 1;
+var time = 15;
+var createFlyTime = 1500;
+var level = window.location.search;
+level = level.replace("?", "");
+if (level === "normal") {
+  //1500 
+  var createFlyTime = 1500;
+} else if (level === "hard") {
+  //1000 
+  var createFlyTime = 1000;
+} else if (level === "extreme") {
+  //750 
+  var createFlyTime = 750;
+} function ajuste() {
+  height = window.innerHeight;
+  width = window.innerWidth;
+  console.log(width, height);
 }
-flyAnimate()
+ajuste();
+var timer = setInterval(function () {
+  time -= 1;
+  if (time < 0) {
+    clearInterval(timer);
+    clearInterval(createFly);
+    window.location.href = "winner.html";
+  } else {
+    document.getElementById("timer").innerHTML = time;
+  }
+}, 1000);
+function randomposition() {
+  //remove the already existing fly
+  if (document.getElementById("fly")) {
+    document.getElementById("fly").remove();
+    if (lives > 3) {
+      window.location.href = "game_over.html";
+    }
+    else {
+      document.getElementById("v" + lives).src = "imagens/diamond_empty.png"; lives++;
+    }
+  }
+  var positionx = Math.floor(Math.random() * width) - 90;
+  var positiony = Math.floor(Math.random() * height) - 90;
+  positionx = positionx < 0 ? 0 : positionx;
+  positiony = positiony < 0 ? 0 : positiony;
+  console.log(positionx, positiony);
+  //create html element 
+  var fly = document.createElement("img");
+  fly.src = "imagens/fly.png";
+  fly.className = randomsize() + " " + randomface();
+  fly.style.left = positionx + "px";
+  fly.style.top = positiony + "px";
+  fly.style.position = "absolute";
+  fly.id = "fly";
+  fly.onclick = function () {
+    this.remove();
+  }; document.body.appendChild(fly);
+}
+function randomsize() {
+  var classe = Math.floor(Math.random() * 3);
+  switch (classe) {
+    case 0:
+      return "fly1";
+    case 1:
+      return "fly2";
+    case 2:
+      return "fly3";
+  }
+}
+function randomface() {
+  var classe = Math.floor(Math.random() * 2);
+  switch (classe) {
+    case 0:
+      return "faceA";
+    case 1:
+      return "faceB";
+  }
+}
