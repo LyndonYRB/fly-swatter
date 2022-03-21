@@ -2,27 +2,24 @@ body {background-color: black;
 
 }
 #gameField {
-  width: 600px;
+  position: relative;
+  width: 700px;
   height: 500px;
   margin: solid 5px;
   background-color: rgb(171, 208, 208);
-  background-size: cover;
-  background-position: center;
-  image-rendering: optimizeSpeed;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: bicubic;
-  overflow: hidden;
 }
 
 
 img {
-  position: absolute
-;
+  position: absolute;
   width: 80px;
 }
+
+.fly {
+position: absolute;
+
+}
+
 .cake {
   position: absolute;
   
@@ -30,7 +27,7 @@ img {
   height: 70px;
   background-color: brown;
   bottom: 0;
-  left: 270px;
+  left: 300px;
 }
 
 
