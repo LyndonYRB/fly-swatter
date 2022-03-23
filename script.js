@@ -1,5 +1,7 @@
-
+//the field...
 let gameField = document.getElementById("gameField");
+let gameFieldWidth = window.innerWidth;
+let gameFieldHeight = window.innerHeight;
 
 let header = document.getElementById("header");
 
@@ -7,7 +9,7 @@ let button = document.createElement("button");
 
 let gameOver = document.createElement("button");
 
-//cake
+//cake...
 let cakeDiv = document.createElement("div");
 cakeDiv.classList.add("cake");
 gameField.appendChild(cakeDiv);
@@ -16,14 +18,14 @@ cakeDiv.appendChild(cakePic);
 cakePic.src = "images/chocolate-cake.png";
 cakeDiv.style.position = "absolute";
 
-//fly
+//fly...
 createFly = () => {
   let flyDiv = document.createElement("div");
   flyDiv.classList.add("fly");
   gameField.appendChild(flyDiv);
   flyPic = document.createElement("img");
-  flyDiv.appendChild(flyPic)
-  flyPic.src = "images/fly-sprite.gif"
+  flyDiv.appendChild(flyPic);
+  flyPic.src = "images/fly-sprite.gif";
   flyDiv.style.position = "absolute";
   flyDiv.style.top = Math.floor(Math.random() * 90 + 5) + '%';
   flyDiv.style.left = Math.floor(Math.random() * 90 + 5) + '%';
@@ -32,6 +34,9 @@ createFly = () => {
 
   let deltaX = 0;
   let deltaY = 0;
+
+  gameFieldWidth = 800;//the boundaries
+  gameFieldHeight = 560;//the boundaries
 
   function animationframe() {
     if (Math.random() > 0.95) {
@@ -46,8 +51,8 @@ createFly = () => {
         deltaY *= -1;
       }
     }
-    flyDiv.style.top = '' + Math.min(Math.max(parseInt(flyDiv.style.top) + deltaY, 0), window.innerHeight - 170) + 'px';
-    flyDiv.style.left = '' + Math.min(Math.max(parseInt(flyDiv.style.left) + deltaX, 0), window.innerWidth - 110) + 'px';
+    flyDiv.style.top = '' + Math.min(Math.max(parseInt(flyDiv.style.top) + deltaY, 0), gameFieldHeight - 110) + 'px';
+    flyDiv.style.left = '' + Math.min(Math.max(parseInt(flyDiv.style.left) + deltaX, 0), gameFieldWidth - 180) + 'px';
     window.requestAnimationFrame(animationframe);
   }
   window.requestAnimationFrame(animationframe);
@@ -56,8 +61,8 @@ createFly = () => {
 
   flyDiv.addEventListener("click", () => {
 
-    setTimeout(() => flyDiv.remove(), 100)
-    setTimeout(() => checkFlies(), 100)
+    setTimeout(() => flyDiv.remove(), 100);
+    setTimeout(() => checkFlies(), 100);
   })
   return flyDiv
 }
