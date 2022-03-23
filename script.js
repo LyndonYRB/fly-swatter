@@ -75,7 +75,8 @@ let checkFlies = () => {
   }
 }
 button.addEventListener('click', () => {
-  for (let i = 0; i < 2; i++); {
+  for (let i = 0; i < 3; i++); {
+    createFly();
     createFly();
     header.innerHTML = "kill the flies before they touch the cake...";
     gameField.removeChild(button);
