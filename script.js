@@ -11,6 +11,7 @@ gameOverPic.classList.add("gameover")
 gameOverPic.src = "images/gameover.jpg"
 gameField.appendChild(gameOverPic)
 gameOverPic.style.display = "none"
+let winCount = 0
 
 
 //conditions
@@ -35,23 +36,22 @@ cakeHeight = cakeDiv.height = 90;
 
 //fly...
 createFly = () => {
-  let youWin = "none";
+
   gameOverPic.style.display = "none"
-  let flyMaker = document.getElementById("flymaker")
+  const flyMaker = document.createElement('div');
+  flyMaker.setAttribute('id', 'flymaker')
   let flyDiv = document.createElement("div");
   flyDiv.classList.add("fly");
-  reAddMaker = function () {
-    gameField.appendChild(flyMaker)
-  }
+
+
+  gameField.appendChild(flyMaker)
+
   flyMaker.appendChild(flyDiv)
   flyPic = document.createElement("img");
   flyDiv.appendChild(flyPic);
   flyPic.src = "images/fly-sprite.gif";
   flyDiv.style.position = "absolute";
-  let removed = false
-  if (removed = true) {
-    reAddMaker()
-  }
+
 
   // fly's W x H
   flyMaker.style.display = "block"
@@ -62,8 +62,9 @@ createFly = () => {
 
   //remove all flies from the field...
   removeFly = () => {
+
     gameField.removeChild(flyMaker)
-    removed = true;
+
   }
 
   //the fly moves...
@@ -108,13 +109,13 @@ createFly = () => {
 
 }
 startGame = () => {
-  flyMaker = document.getElementById("flymaker")
+  youWin = "none";
   header.innerHTML = "kill the fly before it touches the cake...";
 
+  drawFly()
 
 
 
-  createFly();
 
   setInterval(() => {
     let flyX = flyPic.x
@@ -136,7 +137,7 @@ startGame = () => {
   }, 1);
 
   gameOver = () => {
-    youWin = false;
+    youWin = "no";
     gameOverPic.style.display = "block"
     header.innerHTML = "The cake's contaminated now, throw it away!!";
     gameField.appendChild(button);
@@ -147,7 +148,7 @@ startGame = () => {
 // check flies for win condition
 let checkFlies = () => {
   if (document.querySelectorAll(".fly").length === 0) {
-    youWin = true;
+    youWin = "yes";
     header.innerHTML = "You did it!!";
 
     gameField.appendChild(button);
@@ -160,18 +161,20 @@ let checkFlies = () => {
 //button
 button.addEventListener('click', () => {
 
-  if (youWin = true) {
+  if (youWin === "yes") {
     gameField.removeChild(button);
-    createFly()
-    createFly()
+    winCount++;
+    console.log("add " + winCount + " fly")
 
-  } else if (youWin = false) {
-    // flyMaker = document.getElementById("flymaker")
-    createFly()
 
+  } else if (youWin === "no") {
+
+    gameField.removeChild(button);
+    winCount = 0;
+    console.log("try again")
 
   }
-
+  startGame()
 });
 
 checkHeader = () => {
@@ -185,7 +188,11 @@ checkHeader = () => {
     header.innerHTML = "kill the flies before they touch the cake..."
   }
 }
+drawFly = () => {
 
+  createFly(winCount)
+
+}
 
 
 checkHeader();
