@@ -1,6 +1,15 @@
-body {background-color: black;
+body {
+  background-color: black;
 
 }
+
+.gameover {
+  width: 350px;
+  left: 150px;
+  top: 40px;
+  display: none;
+}
+
 #gameField {
   position: relative;
   width: 700px;
@@ -15,19 +24,16 @@ img {
 }
 
 .fly {
-position: absolute;
+  position: absolute;
+  width: 100px;
+  height: 90px;
 }
 
 .cake {
   position: absolute;
   width: 100px;
   height: 90px;
- 
-  bottom: 0;
+
+  bottom: -15px;
   left: 300px;
-}
-
-
-button {
-display: block;
 }
