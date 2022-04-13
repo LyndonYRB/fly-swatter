@@ -104,6 +104,7 @@ createFly = () => {
   flyDiv.addEventListener("click", () => {
 
     flyDiv.remove()
+
     checkFlies()
   })
 
@@ -123,8 +124,8 @@ startGame = () => {
     let distanceX = flyX - cakeX;
     let distanceY = flyY - cakeY;
 
-    let flyPathX = distanceX - 50;
-    let flyPathY = distanceY - 50;
+    distanceX - 150;
+    distanceY - 150;
 
     //fly touch cake...
     if (distanceX > -60 && distanceX < 60 &&
@@ -142,6 +143,7 @@ startGame = () => {
     header.innerHTML = "The cake's contaminated now, throw it away!!";
     gameField.appendChild(button);
     button.innerHTML = "GO AGAIN?";
+
   }
 
 }
@@ -170,7 +172,7 @@ button.addEventListener('click', () => {
   } else if (youWin === "no") {
 
     gameField.removeChild(button);
-    winCount = 0;
+
     console.log("try again")
 
   }
@@ -189,10 +191,16 @@ checkHeader = () => {
   }
 }
 drawFly = () => {
-
-  createFly(winCount)
+  createFly()
+  const addFly = winCount;
+  Array.from({ length: addFly }, () => createFly());
 
 }
+
+
+
+
+
 
 
 checkHeader();
